@@ -1,12 +1,12 @@
 import { useState } from "react";
 import "./RuleBookInput.css";
 
-function getStringBetween(delimiter1, delimiter2, string) {
+function getStringBetween(delimiter1, delimiter2) {
   const regexStr = new RegExp(
     `(?<=${delimiter1})(.|\r|\n)*(?=${delimiter2})`,
     "gi"
   );
-  return string.match(regexStr);
+  return rulebookData.match(regexStr); // Rulebook Data is inside a function below
 }
 
 function RulebookInput(props) {
@@ -32,10 +32,18 @@ function RulebookInput(props) {
     //here we handle the user input and set the value
     //there are other data the form will give such as the user name etc...
     const rulebookData = e.target.value;
-
     // the function getStringBetween can help us find all the strings we need
     // the /n should be replaced with '' space
+    const lobToBeEntered = getStringBetween("CLASS:", "BROKER:");
+    const policyNoToBeEntered = getStringBetween();
+    const marketToBeEntered = getStringBetween();
+    const typeToBeEntered = getStringBetween();
+    const subIdToBeEntered = getStringBetween();
+    const assuredToBeEntered = getStringBetween();
 
+    setUserInput((prevData) => {
+      return { ...prevData, name: lobToBeEntered };
+    });
     {
       const handleLobChange = (e) => {
         const value = e.target.value;
